@@ -6,7 +6,7 @@ class ResizeObserverStub {
   unobserve() {}
   disconnect() {}
 }
-// @ts-expect-error - test polyfill
+// Provide a minimal ResizeObserver polyfill for jsdom tests
 globalThis.ResizeObserver = globalThis.ResizeObserver ?? ResizeObserverStub;
 
 // jsdom doesn't implement the Fullscreen API.

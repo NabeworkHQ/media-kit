@@ -12,7 +12,7 @@ export function el<K extends keyof HTMLElementTagNameMap>(
 ): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
   for (const [key, value] of Object.entries(attrs)) {
-    if (value == null || value === false) continue;
+    if (value == null) continue;
     if (key === "class" || key === "className") {
       node.className = String(value);
     } else if (key in node && typeof (node as any)[key] === "boolean") {
