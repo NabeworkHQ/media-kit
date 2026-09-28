@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Nabework Media Kit - Vanilla Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--
+    CDN usage (no build step): swap these two lines in for the local
+    dev-server imports below once you're deploying to a real site.
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nabework/media-kit/dist/media-kit.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@nabework/media-kit/dist/media-kit.iife.js"></script>
+  -->
+  <style>
+    html, body { margin: 0; height: 100%; background: #000; }
+    #tour { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="tour"></div>
+
+  <script type="module">
+    import { MediaKit } from "../../src/index.ts";
+
+    const manifest = {
+      initialItemId: "living-room-tour",
+      items: [
+        {
+          id: "test",
+          type: "panorama",
+          src: "/shot-panoramic-composition-living-room2.pjpg",
+        },
+        {
+          id: "test2",
+          type: "panorama",
+          src: "/shot-panoramic-composition-living-room.pjpg",
+        },
+        {
+          id: "test3",
+          type: "model3d",
+          src: "/modern-coastal-hillside-villa/source/CasaL7.fbx",
+        },
+        {
+          id: "hero-photo",
+          type: "image",
+          title: { en: "Front exterior", es: "Fachada", fr: "Façade" },
+          src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600",
+          fullSrc: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2400",
+        },
+        {
+          id: "walkthrough-video",
+          type: "video",
+          title: "Video walkthrough",
+          src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          poster: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+        },
+        {
+          id: "floor-plan",
+          type: "document",
+          title: "Floor plan",
+          src: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        },
+        {
+          id: "living-room-pano",
+          type: "panorama",
+          title: "Living room (360°)",
+          src: "https://pannellum.org/images/alma.jpg",
+          hotspots: [
+            { id: "info-1", kind: "info", yaw: 45, pitch: 0, label: "Fireplace", text: "Original 1920s brick fireplace." }
+          ],
+        },
+        {
+          id: "living-room-tour",
+          type: "vr-tour",
+          title: "Full guided tour",
+          interactionMode: "both",
+          scene: {
+            kind: "model3d",
+            item: {
+              src: "https://threejs.org/examples/models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf",
+              waypoints: [
+                { id: "entry", label: "Entryway", position: [0, 1.7, 6], lookAt: [0, 1, 0] },
+                { id: "living", label: "Living room", position: [3, 1.7, 1], lookAt: [0, 1, -2] },
+              ],
+            },
+          },
+          guide: {
+            stops: [
+              { waypointId: "entry", narration: "Welcome! Let's start at the entryway." },
+              { waypointId: "living", narration: "Here's the open-plan living room." },
+            ],
+          },
+          // Optional real-world lead-in. Requires a Google Maps JS API key
+          // with the "Maps JavaScript API" enabled - see
+          // docs/STREET_VIEW_INTEGRATION.md. Omit `streetView` entirely to
+          // skip straight to the indoor tour.
+          // streetView: {
+          //   apiKey: "YOUR_GOOGLE_MAPS_API_KEY",
+          //   position: { lat: 40.758, lng: -73.9855 },
+          //   pov: { heading: 90, pitch: 0 },
+          // },
+        },
+      ],
+    };
+
+    const kit = new MediaKit({
+      container: "#tour",
+      manifest,
+      theme: "dark",
+      onItemChange: (item) => console.log("active item:", item.id),
+      onError: (err) => console.error("media-kit error:", err),
+    });
+
+    window.tourKit = kit; // handy for poking at from the devtools console
+  </script>
+</body>
+</html>

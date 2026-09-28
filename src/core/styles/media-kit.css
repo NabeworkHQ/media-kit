@@ -1,0 +1,379 @@
+/**
+ * Default theme for @nabework/media-kit.
+ * Everything is driven by CSS custom properties so host apps (including
+ * shadcn/Tailwind-based dashboards) can retheme without overriding rules -
+ * just redefine the variables on `.nmk-root` or an ancestor.
+ */
+.nmk-root {
+  --nmk-bg: #0b0c0f;
+  --nmk-surface: rgba(20, 21, 26, 0.85);
+  --nmk-surface-solid: #16171c;
+  --nmk-fg: #f5f5f7;
+  --nmk-muted: #a1a1aa;
+  --nmk-accent: #6d5efc;
+  --nmk-accent-fg: #ffffff;
+  --nmk-border: rgba(255, 255, 255, 0.12);
+  --nmk-radius: 10px;
+  --nmk-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--nmk-fg);
+  font-family: var(--nmk-font);
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.nmk-root[data-nmk-theme="light"] {
+  --nmk-bg: #ffffff;
+  --nmk-surface: rgba(255, 255, 255, 0.9);
+  --nmk-surface-solid: #ffffff;
+  --nmk-fg: #16171c;
+  --nmk-muted: #52525b;
+  --nmk-border: rgba(0, 0, 0, 0.12);
+}
+
+.nmk-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  background: var(--nmk-bg);
+  border-radius: var(--nmk-radius);
+  overflow: hidden;
+}
+
+.nmk-shell__viewer {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.nmk-shell__viewer > * {
+  position: absolute;
+  inset: 0;
+}
+
+.nmk-shell__top {
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+  pointer-events: none;
+}
+.nmk-shell__top > * {
+  pointer-events: auto;
+}
+
+.nmk-shell__bottom {
+  position: relative;
+  z-index: 20;
+  background: var(--nmk-surface);
+  backdrop-filter: blur(6px);
+}
+
+/* Toolbar */
+.nmk-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--nmk-surface);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  padding: 4px;
+}
+.nmk-toolbar__btn {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--nmk-fg);
+  cursor: pointer;
+  font-size: 14px;
+}
+.nmk-toolbar__btn:hover {
+  background: var(--nmk-border);
+}
+.nmk-toolbar__locale {
+  background: transparent;
+  color: var(--nmk-fg);
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Thumbnails */
+.nmk-thumbnails {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  overflow-x: auto;
+}
+.nmk-thumbnails__item {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background: var(--nmk-surface-solid);
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.nmk-thumbnails__item[aria-selected="true"] {
+  border-color: var(--nmk-accent);
+}
+.nmk-thumbnails__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Onboarding */
+.nmk-onboarding {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+}
+.nmk-onboarding__card {
+  background: var(--nmk-surface-solid);
+  color: var(--nmk-fg);
+  border-radius: var(--nmk-radius);
+  padding: 20px 24px;
+  max-width: 320px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+.nmk-onboarding__list {
+  margin: 12px 0;
+  padding-inline-start: 20px;
+  color: var(--nmk-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.nmk-onboarding__checkbox {
+  display: block;
+  font-size: 12px;
+  color: var(--nmk-muted);
+  margin-bottom: 12px;
+}
+.nmk-onboarding__dismiss {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--nmk-accent);
+  color: var(--nmk-accent-fg);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Image viewer */
+.nmk-image-viewer {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+.nmk-image-viewer__img {
+  max-width: 100%;
+  max-height: 100%;
+  user-select: none;
+  transition: transform 0.05s linear;
+}
+
+/* Video viewer */
+.nmk-video-viewer {
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+/* Document viewer */
+.nmk-document-viewer {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #525659;
+}
+.nmk-document-viewer__iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.nmk-document-viewer__nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  color: #fff;
+}
+.nmk-document-viewer__nav button {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+/* Panorama viewer */
+.nmk-panorama-viewer,
+.nmk-panorama-viewer canvas {
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+.nmk-panorama-viewer__hotspots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.nmk-hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: rgba(109, 94, 252, 0.85);
+  box-shadow: 0 0 0 6px rgba(109, 94, 252, 0.25);
+  cursor: pointer;
+  pointer-events: auto;
+  animation: nmk-pulse 2s infinite;
+}
+.nmk-hotspot--info {
+  background: rgba(255, 255, 255, 0.85);
+}
+@keyframes nmk-pulse {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(109, 94, 252, 0.25); }
+  50% { box-shadow: 0 0 0 10px rgba(109, 94, 252, 0.12); }
+}
+
+/* 3D / VR tour */
+.nmk-model3d-viewer,
+.nmk-vrtour__scene {
+  width: 100%;
+  height: 100%;
+}
+.nmk-vrtour {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.nmk-vrtour__scene {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+}
+.nmk-vrtour__scene--active {
+  visibility: visible;
+}
+.nmk-viewer__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nmk-muted);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.nmk-joystick {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--nmk-border);
+  z-index: 10;
+}
+.nmk-joystick__knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px;
+  border-radius: 50%;
+  background: var(--nmk-accent);
+}
+
+.nmk-vrtour__guide {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--nmk-surface);
+  backdrop-filter: blur(6px);
+  padding: 10px 16px;
+  border-radius: 999px;
+  max-width: min(90%, 520px);
+}
+.nmk-vrtour__narration {
+  margin: 0;
+  font-size: 13px;
+  color: var(--nmk-fg);
+}
+.nmk-vrtour__guide button {
+  border: none;
+  background: var(--nmk-accent);
+  color: var(--nmk-accent-fg);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+/* Street View bridge */
+.nmk-streetview-bridge {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+.nmk-streetview-bridge__pano {
+  width: 100%;
+  height: 100%;
+}
+.nmk-streetview-bridge__enter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  background: var(--nmk-accent);
+  color: var(--nmk-accent-fg);
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}

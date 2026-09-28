@@ -1,0 +1,97 @@
+{
+  "name": "@nabework/media-kit",
+  "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Framework-agnostic media viewer kit: images, video, documents, panoramas, 3D models and guided VR tours (with optional Google Street View lead-in). Usable via npm or a single <script> tag from a CDN.",
+  "license": "MIT",
+  "author": "Nabework",
+  "homepage": "https://github.com/NabeworkHQ/media-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NabeworkHQ/media-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NabeworkHQ/media-kit/issues"
+  },
+  "keywords": [
+    "media-viewer",
+    "3d-viewer",
+    "panorama",
+    "360",
+    "vr-tour",
+    "virtual-tour",
+    "gltf",
+    "three.js",
+    "street-view",
+    "real-estate",
+    "hospitality"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./dist/media-kit.cjs",
+  "module": "./dist/media-kit.js",
+  "types": "./dist/media-kit.d.ts",
+  "unpkg": "./dist/media-kit.iife.js",
+  "jsdelivr": "./dist/media-kit.iife.js",
+  "exports": {
+    ".": {
+      "types": "./dist/media-kit.d.ts",
+      "import": "./dist/media-kit.js",
+      "require": "./dist/media-kit.cjs"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs"
+    },
+    "./styles.css": "./dist/media-kit.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite examples/vanilla --port 5432",
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests --ext .ts,.tsx",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@types/three": "^0.180.0",
+    "@vitest/coverage-v8": "^2.1.0",
+    "jsdom": "^25.0.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0",
+    "vite": "^5.4.0",
+    "vitest": "^2.1.0"
+  }
+}
